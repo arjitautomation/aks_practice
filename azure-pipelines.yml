@@ -10,8 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: DownloadBuildArtifacts@1
+- task: ArchiveFiles@2
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    downloadPath: '$(System.ArtifactsDirectory)'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
