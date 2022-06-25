@@ -10,13 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: DownloadPipelineArtifact@2
+- task: DownloadBuildArtifacts@1
   inputs:
     buildType: 'current'
-    targetPath: '$(Pipeline.Workspace)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    downloadType: 'single'
+    downloadPath: '$(System.ArtifactsDirectory)'
